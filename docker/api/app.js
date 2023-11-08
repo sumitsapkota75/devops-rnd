@@ -4,15 +4,19 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
-app.get("/",(req,res)=>{
+app.get("/", (req, res) =>{
     res.json([
         {
-            name:"Sumit sapkota",
+            name:"Sumit sapkota....",
             age:25
         },
         {
             name:"Ram Prasad",
             age:26
+        },
+        {
+            name:"Hari Shahi",
+            age:29
         }
     ])
 })
