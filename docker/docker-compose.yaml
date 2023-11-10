@@ -1,11 +1,21 @@
 version: "3.8"
 
 services:
-  api:
-    build: ./api
-    container_name: api_c
-    ports:
-      - '4000:4000'
+  # api:
+  #   build: ./api
+  #   container_name: api_c
+  #   ports:
+  #     - '4000:4000'
+  #   volumes:
+  #     - ./api:/app
+  #     - /app/node_modules
+
+  react-app:
+    build: ./blog-app
+    container_name: react-app-container
+    ports: 
+      - "3000:3000"
     volumes:
-      - ./api:/app
-      - ./app/node_modules
+      - ./blog-app:/app
+      - /app/node_modules
+
