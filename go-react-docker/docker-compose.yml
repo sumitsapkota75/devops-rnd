@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  api:
+    build: ./go-api
+    container_name: api_container
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./go-api:/app
+
+  react_app:
+    build: ./react-app
+    container_name: react_container
+    ports: 
+      - "3000:3000"
+    volumes:
+      - ./react-app:/app
+      - /react-app/node_modules
