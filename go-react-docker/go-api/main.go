@@ -1,11 +1,13 @@
 package main
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"net/http"
 	"os"
+
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 )
 
 // User struct represents the user information
@@ -16,26 +18,24 @@ type User struct {
 }
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	router := gin.Default()
+	router.Use(cors.Default())
+	router.GET("/", func(c *gin.Context) {
 		// when receive the request, print the greeting meassage
-		fmt.Fprint(w, "API is runnning....")
+		c.JSON(200, gin.H{
+			"message": "Hello, welcome to your Gin server!",
+		})
 
 	})
-	http.HandleFunc("/users", func(w http.ResponseWriter, r *http.Request) {
+	router.GET("/users", func(c *gin.Context) {
 		users := []User{
 			{ID: 1, Name: "John Doe", Email: "john@example.com"},
 			{ID: 2, Name: "Jane Doe", Email: "jane@example.com"},
+			{ID: 3, Name: "Sumit Sapkota 1", Email: "sumit@example.com"},
 		}
-		// Encode the user list to JSON format
-		usersJSON, err := json.Marshal(users)
-		if err != nil {
-			http.Error(w, "Error encoding users to JSON", http.StatusInternalServerError)
-			return
-		}
-		w.Header().Set("Content-Type", "application/json")
-		w.Write(usersJSON)
+		c.JSON(http.StatusOK, users)
 	})
-	err := http.ListenAndServe(":8080", nil)
+	err := router.Run(":8080")
 	if errors.Is(err, http.ErrServerClosed) {
 		fmt.Printf("server closed\n")
 	} else if err != nil {
