@@ -31,7 +31,7 @@ func main() {
 		users := []User{
 			{ID: 1, Name: "John Doe", Email: "john@example.com"},
 			{ID: 2, Name: "Jane Doe", Email: "jane@example.com"},
-			{ID: 3, Name: "Sumit Sapkota 1", Email: "sumit@example.com"},
+			{ID: 3, Name: "Sumit Sapkota 2", Email: "sumit@example.com"},
 		}
 		c.JSON(http.StatusOK, users)
 	})
