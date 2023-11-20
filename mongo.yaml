@@ -38,9 +38,15 @@ kind: Service
 metadata:
   name: mongo-service
 spec:
+  # type determines either service is internal or external
+  # type: cluserIP -> It is the default value if not specified
+  # nodeport is for static port, 
+  type: NodePort
   selector:
     app.kubernetes.io/name: mongo
   ports:
     - protocol: TCP
       port: 27017
       targetPort: 27017
+      # nodeport should be in range of  (default: 30000-32767)
+      nodePort: 30100
